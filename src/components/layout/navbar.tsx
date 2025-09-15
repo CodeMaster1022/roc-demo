@@ -61,12 +61,13 @@ const Navbar: React.FC = () => {
         return [
           ...baseItems,
           { href: '/search', label: 'Search', icon: Search },
+          { href: '/roommates', label: 'Find Roommates', icon: Users },
           { href: '/favorites', label: 'Favorites', icon: User },
           { href: '/applications', label: 'My Applications', icon: Building }
         ];
       case 'admin':
         return [
-          ...baseItems,
+          { href: '/admin/dashboard', label: 'Admin Dashboard', icon: Home },
           { href: '/admin/properties', label: 'Properties', icon: Building },
           { href: '/admin/users', label: 'Users', icon: Users },
           { href: '/admin/analytics', label: 'Insights', icon: BarChart3 }
