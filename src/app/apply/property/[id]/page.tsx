@@ -17,7 +17,7 @@ const PropertyApplicationPage: React.FC = () => {
   const { user } = useAuth();
   
   const propertyId = params.id as string;
-  const roomId = new URLSearchParams(window.location.search).get('roomId');
+  const roomId = new URLSearchParams(window.location.search).get('roomId') || undefined;
   
   const [property, setProperty] = useState<any>(null);
   const [selectedRoom, setSelectedRoom] = useState<any>(null);

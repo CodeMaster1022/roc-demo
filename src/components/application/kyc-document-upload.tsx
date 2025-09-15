@@ -75,7 +75,16 @@ const KYCDocumentUpload: React.FC<KYCDocumentUploadProps> = ({
 
   // KYC document requirements based on applicant type
   const getRequiredDocuments = () => {
-    const baseDocuments = [
+    const baseDocuments: Array<{
+      id: string;
+      name: string;
+      category: 'identity' | 'income' | 'address' | 'education' | 'guardian';
+      description: string;
+      required: boolean;
+      acceptedTypes: string[];
+      maxSize: number;
+      verificationFeatures: string[];
+    }> = [
       {
         id: 'government_id',
         name: 'Government-issued ID',

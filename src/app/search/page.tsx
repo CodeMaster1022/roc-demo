@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,7 +39,7 @@ import {
 import { searchService, searchFilters } from '@/lib/search-mock-data';
 import { toast } from 'sonner';
 
-const SearchPage: React.FC = () => {
+const SearchContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -604,6 +604,38 @@ const SearchPage: React.FC = () => {
         )}
       </main>
     </div>
+  );
+};
+
+// Loading fallback component
+const SearchPageFallback = () => (
+  <div className="min-h-screen bg-gray-50">
+    <Navbar />
+    <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <div className="animate-pulse">
+        <div className="h-12 bg-gray-200 rounded mb-6"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i}>
+              <div className="bg-gray-200 h-64 rounded-t-lg mb-4"></div>
+              <div className="space-y-3">
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-200 rounded w-full"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  </div>
+);
+
+const SearchPage: React.FC = () => {
+  return (
+    <Suspense fallback={<SearchPageFallback />}>
+      <SearchContent />
+    </Suspense>
   );
 };
 

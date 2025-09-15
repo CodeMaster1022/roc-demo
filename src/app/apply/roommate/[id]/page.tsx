@@ -19,7 +19,7 @@ const RoommateApplicationPage: React.FC = () => {
   
   const roommateId = params.id as string;
   const propertyId = searchParams.get('propertyId') || '';
-  const roomId = searchParams.get('roomId');
+  const roomId = searchParams.get('roomId') ?? undefined;
   
   const [roommate, setRoommate] = useState<any>(null);
   const [property, setProperty] = useState<any>(null);
